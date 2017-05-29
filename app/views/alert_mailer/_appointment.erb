@@ -1,0 +1,13 @@
+The appointment has been scheduled.
+
+Doctor:
+<%= @doctor.name %>
+<%= @doctor.street %>
+<%= @doctor.city %>, <%= @doctor.state_name %> <%= @doctor.zip %>
+
+Patient: <%= @patient.name %>
+
+<%= @appointment.scheduled_at.strftime('%m/%d/%Y @ %I:%M %p') %>
+
+Thanks,
+Appointment Scheduler

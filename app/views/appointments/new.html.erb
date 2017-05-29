@@ -1,0 +1,75 @@
+ <%= form_for @appointment do |f| %>
+    <%= f.fields_for :patient do |p| %>
+      <div class="form-group row">
+        <%= p.label(:first_name, class: 'col-sm-2 col-form-label col-form-label-lg') %>
+        <div class="col-sm-4">
+          <%= p.text_field :first_name, class: 'form-control form-control-lg', placeholder: 'First name' %>
+        </div>
+        <%= p.label(:last_name, class: 'col-sm-2 col-form-label col-form-label-lg') %>
+        <div class="col-sm-4">
+          <%= p.text_field :last_name, class: 'form-control form-control-lg', placeholder: 'Last name' %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= p.label(:email, class: 'col-sm-2 col-form-label col-form-label-lg') %>
+        <div class="col-sm-10">
+          <%= p.text_field :email, class: 'form-control form-control-lg', placeholder: 'Your Email' %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= p.label(:street, class: 'col-sm-2 col-form-label col-form-label-lg') %>
+        <div class="col-sm-10">
+          <%= p.text_field :street, class: 'form-control form-control-lg', placeholder: 'Your address' %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= p.label(:city, class: 'col-sm-2 col-form-label col-form-label-lg') %>
+        <div class="col-sm-3">
+          <%= p.text_field :city, class: 'form-control form-control-lg', placeholder: 'City' %>
+        </div>
+        <%= p.label(:state, class: 'col-sm-1 col-form-label col-form-label-lg') %>
+        <div class="col-sm-2">
+          <%= p.collection_select :state, Patient::US_STATES, :first, :last, {}, { class: 'form-control form-control-lg' } %>
+        </div>
+        <%= p.label(:zip, 'Zip', class: 'col-sm-1 col-form-label col-form-label-lg') %>
+        <div class="col-sm-3">
+          <%= p.text_field :zip, class: 'form-control form-control-lg', placeholder: 'Zipcode' %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <hr>
+      </div>
+    <% end %>
+    <div class="form-group row">
+      <%= f.label(:diagnosis_id, "What health issue are you having?", class: 'col-sm-5 col-form-label col-form-label-lg') %>
+      <div class="col-sm-7">
+        <%= f.collection_select :diagnosis_id, Diagnosis.all, :id, :name, {}, { class: 'form-control form-control-lg' } %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label(:appointment_time, "When would you like an appointment?", class: 'col-sm-5 col-form-label col-form-label-lg') %>
+      <div class="col-sm-7">
+         <div class='input-group date'>
+            <%= f.text_field :appointment_time, type: 'datetime', class: 'form-control', id: 'datetimepicker', value: @appointment.properly_formatted_time  %>
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+         </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-12 text-center">
+        <%= f.submit "Setup Appointment", class: 'btn btn-lg btn-info' %>
+      </div>
+    </div>
+<% end %>
+
+
+<% content_for :header do %>
+<script>
+$(function () {
+  $('#datetimepicker').datetimepicker({minDate: '<%=(Time.now+Appointment::MIN_SCHEDULED_DAYS_FROM_NOW).iso8601%>'});
+});
+</script>
+<% end %>
+

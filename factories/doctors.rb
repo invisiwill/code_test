@@ -8,5 +8,6 @@ FactoryGirl.define do
     city { Faker::Address.city }
     state { Faker::Address.state_abbr }
     zip { Faker::Address.zip }
+    specialty { Specialty.find_or_create_by(name: Faker::Name.specialty_name) }
   end
 end

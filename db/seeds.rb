@@ -6,6 +6,16 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+3.times do
+  FactoryGirl.create :specialty
+end
+Faker::Name.unique.clear
+
+3.times do
+  FactoryGirl.create :diagnosis
+end
+Faker::Name.unique.clear
+
 10.times do
   FactoryGirl.create :doctor
 end
@@ -13,3 +23,4 @@ end
 10.times do
   FactoryGirl.create :patient
 end
+

@@ -1,4 +1,4 @@
-# Spreemo Code Test
+# Code test
 
 We're going to build a tool to schedule doctor's appointments. We already have a
 way to keep track of the patients that need to be scheduled and the doctors that
@@ -25,4 +25,4 @@ You need to do the following:
 Be sure to include adequate tests for all the functionality you add.
 
 Sample doctor and patient records have been provided to ease development. Run
-`rake db:setup` to initialize them.
+`rake db:setup` to get the app running with sample data.
